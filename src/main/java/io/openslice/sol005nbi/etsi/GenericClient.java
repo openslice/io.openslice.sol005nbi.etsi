@@ -402,5 +402,17 @@ public class GenericClient implements OSMClient{
 	public JSONObject getNSLCMDetails(String nsLcmOpOccId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> uploadVNFDPackageContent(String vnfd_id, byte[] allBytes) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> uploadNSDPackageContent(String nsd_id, byte[] allBytes) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }
