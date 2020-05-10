@@ -22,11 +22,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 @Schema(description = "IndividualVNF package resource creation parameters, as defined in clause 9.5.2.2 ")
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-03-20T00:01:04.793+02:00[Europe/Athens]")
-public class Body {
+public class CreateVnfPkgInfoRequestBody {
   @JsonProperty("CreateVnfPkgInfoRequest")
   private VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest = null;
 
-  public Body createVnfPkgInfoRequest(VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest) {
+  public CreateVnfPkgInfoRequestBody createVnfPkgInfoRequest(VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest) {
     this.createVnfPkgInfoRequest = createVnfPkgInfoRequest;
     return this;
   }
@@ -53,7 +53,7 @@ public class Body {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Body body = (Body) o;
+    CreateVnfPkgInfoRequestBody body = (CreateVnfPkgInfoRequestBody) o;
     return Objects.equals(this.createVnfPkgInfoRequest, body.createVnfPkgInfoRequest);
   }
 

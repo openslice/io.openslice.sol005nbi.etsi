@@ -484,7 +484,8 @@ public class ApiClient {
      * @return Object the selected body
      */
     protected Object selectBody(Object obj, MultiValueMap<String, Object> formParams, MediaType contentType) {
-        boolean isForm = MediaType.MULTIPART_FORM_DATA.isCompatibleWith(contentType) || MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(contentType);
+        boolean isForm = MediaType.MULTIPART_FORM_DATA.isCompatibleWith(contentType) 
+        		|| MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(contentType) ;
         return isForm ? formParams : obj;
     }
 

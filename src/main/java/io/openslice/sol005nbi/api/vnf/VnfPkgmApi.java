@@ -19,7 +19,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import io.openslice.sol005nbi.model.vnf.Body;
+import io.openslice.sol005nbi.model.vnf.CreateVnfPkgInfoRequestBody;
 import io.openslice.sol005nbi.model.vnf.Body1;
 import io.openslice.sol005nbi.model.vnf.Body2;
 import io.openslice.sol005nbi.model.vnf.Body3;
@@ -325,8 +325,8 @@ public class VnfPkgmApi {
      * @return Object
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public Object vnfPackagesPost(Body body, String accept, String contentType, String authorization) throws RestClientException {
-        Object postBody = body;
+    public VnfPackagesVnfPkgInfo vnfPackagesPost(CreateVnfPkgInfoRequestBody body, String accept, String contentType, String authorization) throws RestClientException {
+    	CreateVnfPkgInfoRequestBody postBody = body;
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'body' when calling vnfPackagesPost");
@@ -362,7 +362,7 @@ public class VnfPkgmApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<Object> returnType = new ParameterizedTypeReference<Object>() {};
+        ParameterizedTypeReference<VnfPackagesVnfPkgInfo> returnType = new ParameterizedTypeReference<VnfPackagesVnfPkgInfo>() {};
         return apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams,  headerAccept, hcontentType, authNames, returnType);
     }
     /**
@@ -607,8 +607,8 @@ public class VnfPkgmApi {
      * @param authorization The authorization token for the request. Reference: IETF RFC 7235 
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public void vnfPackagesVnfPkgIdPackageContentPut(String accept, String vnfPkgId, File file, String authorization) throws RestClientException {
-        Object postBody = null;
+    public void vnfPackagesVnfPkgIdPackageContentPut(String accept, String vnfPkgId, File file, byte[] allBytes, String contentType, String authorization) throws RestClientException {
+        Object postBody = allBytes;
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'accept' when calling vnfPackagesVnfPkgIdPackageContentPut");
@@ -625,8 +625,7 @@ public class VnfPkgmApi {
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
-        if (accept != null)
-            headerParams.add("Accept", apiClient.parameterToString(accept));
+        
         if (authorization != null)
             headerParams.add("Authorization", apiClient.parameterToString(authorization));
         if (file != null)
@@ -635,16 +634,25 @@ public class VnfPkgmApi {
         final String[] accepts = { 
             "application/json"
          };
+        if (accept != null)
+        	accepts[0] = accept;
+
         final List<MediaType> headerAccept = apiClient.selectHeaderAccept(accepts);
+        
         final String[] contentTypes = { 
-            "multipart/form-data"
-         };
-        final MediaType contentType = apiClient.selectHeaderContentType(contentTypes);
+                "multipart/form-data"
+             };
+
+        if (contentType != null) {
+        	contentTypes[0] = contentType;
+        }
+        
+        final MediaType acontentType = apiClient.selectHeaderContentType(contentTypes);
 
         String[] authNames = new String[] {  };
 
         ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
-        apiClient.invokeAPI(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams,  headerAccept, contentType, authNames, returnType);
+        apiClient.invokeAPI(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams,  headerAccept, acontentType, authNames, returnType);
     }
     /**
      * Upload a VNF package by providing the address information of the VNF package.

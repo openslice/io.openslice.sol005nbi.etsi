@@ -1,5 +1,9 @@
 package io.openslice.sol005nbi.etsi;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +13,8 @@ import io.openslice.sol005nbi.api.nslcm.NslcmDefaultApi;
 import io.openslice.sol005nbi.api.vnf.VnfPkgmApi;
 import io.openslice.sol005nbi.model.nsd.InlineResponse2001;
 import io.openslice.sol005nbi.model.nslcm.NsInstancesNsInstance;
+import io.openslice.sol005nbi.model.vnf.CreateVnfPkgInfoRequestBody;
+import io.openslice.sol005nbi.model.vnf.VnfPackagesCreateVnfPkgInfoRequest;
 import io.openslice.sol005nbi.model.vnf.VnfPackagesVnfPkgInfo;
 
 public class OSMClientTest {
@@ -32,7 +38,7 @@ public class OSMClientTest {
 	public void runMe(){
 		
 		
-	    GenericClient osm7Clientent = new GenericClient("https://10.10.10.37:9999","admin","admin","admin");
+	    GenericClient osm7Clientent = new GenericClient("https://10.10.10.37:9999","admin","osmadmin#$","admin");
 
 
 	//{vnf: [ {member-vnf-index: "1", vdu:[ {id: mgmtVM, interface: [{name: mgmtVM-eth0, floating-ip-required: True }]} ] } ], vld: [ {name: mgmtnet, vim-network-name: OSMFIVE_selfservice01} ] }    
@@ -51,6 +57,24 @@ public class OSMClientTest {
 	    
 	    for (VnfPackagesVnfPkgInfo v : vnfPkgmApi.vnfPackagesGet("application/json", null, null, null, null, null, null) )  {
 			System.out.println("=== LIST VNFDs POJO object response: " + v.toString());				
+		}
+	    
+	    CreateVnfPkgInfoRequestBody body = new CreateVnfPkgInfoRequestBody();
+	    VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest = new VnfPackagesCreateVnfPkgInfoRequest();
+		body.createVnfPkgInfoRequest(createVnfPkgInfoRequest );
+		VnfPackagesVnfPkgInfo resultvnf = vnfPkgmApi.vnfPackagesPost(body, "application/json", "application/json", null);
+	    String vnfPkgId = resultvnf.getVnfdId();
+	    if ( vnfPkgId == null) {
+	    	 vnfPkgId = resultvnf.getId(); 
+	    }
+		File file = new File("src/test/resources/cirros_vnf.tar.gz");
+		byte[] fileContent;
+		try {
+			fileContent = Files.readAllBytes(file.toPath());
+			vnfPkgmApi.vnfPackagesVnfPkgIdPackageContentPut("application/json", vnfPkgId, file, fileContent, "application/zip", null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	    
 
