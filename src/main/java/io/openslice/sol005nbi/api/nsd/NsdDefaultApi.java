@@ -427,8 +427,55 @@ public class NsdDefaultApi {
      * @param authorization The authorization token for the request. Reference: IETF RFC 7235. 
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public void nsDescriptorsNsdInfoIdNsdContentPut(String nsdInfoId, String version, String contentType, String authorization) throws RestClientException {
-        Object postBody = null;
+    public void nsDescriptorsNsdInfoIdNsdContentPut(String nsdInfoId, String version, String contentType, byte[] allBytes, String authorization) throws RestClientException {
+
+    	ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
+    	nsDescriptorsNsdInfoIdNsdContentPutResult(nsdInfoId, version, contentType, allBytes, authorization, returnType);
+    	
+    	//        Object postBody = null;
+//        // verify the required parameter 'nsdInfoId' is set
+//        if (nsdInfoId == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'nsdInfoId' when calling nsDescriptorsNsdInfoIdNsdContentPut");
+//        }
+//        // verify the required parameter 'version' is set
+//        if (version == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'version' when calling nsDescriptorsNsdInfoIdNsdContentPut");
+//        }
+//        // verify the required parameter 'contentType' is set
+//        if (contentType == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'contentType' when calling nsDescriptorsNsdInfoIdNsdContentPut");
+//        }
+//        // create path and map variables
+//        final Map<String, Object> uriVariables = new HashMap<String, Object>();
+//        uriVariables.put("nsdInfoId", nsdInfoId);
+//        String path = UriComponentsBuilder.fromPath("/ns_descriptors/{nsdInfoId}/nsd_content").buildAndExpand(uriVariables).toUriString();
+//        
+//        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+//        final HttpHeaders headerParams = new HttpHeaders();
+//        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+//        if (authorization != null)
+//            headerParams.add("Authorization", apiClient.parameterToString(authorization));
+//        if (version != null)
+//            headerParams.add("Version", apiClient.parameterToString(version));
+//        if (contentType != null)
+//            headerParams.add("Content-Type", apiClient.parameterToString(contentType));
+//
+//        final String[] accepts = { 
+//            "application/json"
+//         };
+//        final List<MediaType> accept = apiClient.selectHeaderAccept(accepts);
+//        final String[] contentTypes = {  };
+//        final MediaType hcontentType = apiClient.selectHeaderContentType(contentTypes);
+//
+//        String[] authNames = new String[] {  };
+//
+//        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
+//        apiClient.invokeAPI(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams, accept, hcontentType, authNames, returnType);
+    }
+    
+    
+    public <T> ResponseEntity<T>  nsDescriptorsNsdInfoIdNsdContentPutResult(String nsdInfoId, String version, String contentType, byte[] allBytes, String authorization, ParameterizedTypeReference<T> returnType) throws RestClientException {
+        Object postBody = allBytes;
         // verify the required parameter 'nsdInfoId' is set
         if (nsdInfoId == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'nsdInfoId' when calling nsDescriptorsNsdInfoIdNsdContentPut");
@@ -465,9 +512,10 @@ public class NsdDefaultApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
-        apiClient.invokeAPI(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams, accept, hcontentType, authNames, returnType);
+        return apiClient.invokeAPIResponseEntity(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams, accept, hcontentType, authNames, returnType);
     }
+    
+    
     /**
      * 
      * The GET method reads the content of the NSD within an NSD archive. The NSD can be implemented as a single file or as a collection of multiple files. If the NSD is implemented in the form of multiple files, a ZIP file embedding these files shall be returned. If the NSD is implemented as a single file, either that file or a ZIP file embedding that file shall be returned. The selection of the format is controlled by the \&quot;Accept\&quot; HTTP header passed in the GET request: • If the \&quot;Accept\&quot; header contains only \&quot;text/plain\&quot; and the NSD is implemented as a single file,     the file shall be returned; otherwise, an error message shall be returned. • If the \&quot;Accept\&quot; header contains only \&quot;application/zip\&quot;, the single file or     the multiple files that make up the NSD shall be returned embedded in a ZIP file. • If the \&quot;Accept\&quot; header contains both \&quot;text/plain\&quot; and \&quot;application/zip\&quot;, it is up     to the NFVO to choose the format to return for a single-file NSD; for a multi-file NSD,     a ZIP file shall be returned. The default format of the ZIP file shall be the one specified in ETSI GS NFV-SOL 007 where only the YAML files representing the NSD, and information necessary to navigate the ZIP file and to identify the file that is the entry point for parsing the NSD and (if requested) further security information are included. This means that the content of the ZIP archive shall contain the following files from the NSD archive: • TOSCA.meta (if available in the NSD archive); • the main service template (either as referenced from TOSCA.meta or available as a     file with the extension \&quot;.yml\&quot; or \&quot;.yaml\&quot; from the root of the archive); • every component of the NSD referenced (recursively) from the main service template; • the related security information, if the \&quot;include_signatures\&quot; URI parameter is provided, as follows: - the manifest file; - the singleton certificate file in the root of the NSD archive (if available in the NSD archive); - the signing certificates of the individual files included in the ZIP archive     (if available in the NSD archive); - the signatures of the individual files (if available in the NSD archive). This method shall follow the provisions specified in the Tables 5.4.4a.3.2-1 and 5.4.4a.3.2-2 for URI query parameters, request and response data structures, and response codes. 

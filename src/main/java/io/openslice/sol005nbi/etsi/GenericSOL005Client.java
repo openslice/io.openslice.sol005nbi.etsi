@@ -438,10 +438,19 @@ public class GenericSOL005Client implements OSMClient{
 		
 		return resultvnf;
 	}
+	
+	@Override
+	public ResponseEntity<String> uploadNSDPackageContent(String nsd_id, byte[] allBytes) throws IOException {
+
+
+        ParameterizedTypeReference<String> returnType = new ParameterizedTypeReference<String>() {};
+		defaultApitNsdApi.nsDescriptorsNsdInfoIdNsdContentPutResult( nsd_id, "1.0", "application/zip", allBytes, null, returnType);
+		return null;
+	
+	}	
 
 	@Override
 	public ResponseEntity<String> uploadNSDPackageContent(String nsd_id, String pLocation) throws IOException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -459,9 +468,5 @@ public class GenericSOL005Client implements OSMClient{
 
 
 
-	@Override
-	public ResponseEntity<String> uploadNSDPackageContent(String nsd_id, byte[] allBytes) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}	
+
 }
