@@ -507,6 +507,35 @@ public class ApiClient {
      */
     public <T> T invokeAPI(String path, HttpMethod method, MultiValueMap<String, String> queryParams, Object body, HttpHeaders headerParams, MultiValueMap<String, Object> formParams, List<MediaType> accept, MediaType contentType, String[] authNames, ParameterizedTypeReference<T> returnType) throws RestClientException {
         
+    	
+    	ResponseEntity<T> result = invokeAPIResponseEntity(path, method, queryParams, body, headerParams, formParams, accept, contentType, authNames, returnType);
+    	
+    	if ( result!= null ) {
+    		return result.getBody();
+    	} 
+    	
+     	return null;
+    }
+    
+    
+    /**
+     * Invoke API by sending HTTP request with the given options.
+     *
+     * @param <T> the return type to use
+     * @param path The sub-path of the HTTP URL
+     * @param method The request method
+     * @param queryParams The query parameters
+     * @param body The request body object
+     * @param headerParams The header parameters
+     * @param formParams The form parameters
+     * @param accept The request's Accept header
+     * @param contentType The request's Content-Type header
+     * @param authNames The authentications to apply
+     * @param returnType The return type into which to deserialize the response
+     * @return The response body in chosen type
+     */
+    public <T> ResponseEntity<T> invokeAPIResponseEntity(String path, HttpMethod method, MultiValueMap<String, String> queryParams, Object body, HttpHeaders headerParams, MultiValueMap<String, Object> formParams, List<MediaType> accept, MediaType contentType, String[] authNames, ParameterizedTypeReference<T> returnType) throws RestClientException {
+        
      	if ( ( authNames == null ) || ( authNames.length == 0 )) {
     		authNames = new String[] { "bearerAuth" };
     	}
@@ -536,13 +565,11 @@ public class ApiClient {
         statusCode = responseEntity.getStatusCode();
         responseHeaders = responseEntity.getHeaders();
 
-        if (responseEntity.getStatusCode() == HttpStatus.NO_CONTENT) {
-            return null;
-        } else if (responseEntity.getStatusCode().is2xxSuccessful()) {
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
             if (returnType == null) {
                 return null;
             }
-            return responseEntity.getBody();
+            return responseEntity;
         } else {
             // The error handler built into the RestTemplate should handle 400 and 500 series errors.
             throw new RestClientException("API returned " + statusCode + " and it wasn't handled by the RestTemplate error handler");

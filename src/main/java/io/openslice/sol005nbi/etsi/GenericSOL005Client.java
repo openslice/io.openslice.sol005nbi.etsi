@@ -28,7 +28,10 @@
 
 package io.openslice.sol005nbi.etsi;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -47,6 +50,7 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -57,11 +61,16 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import io.openslice.sol005nbi.OSMClient;
+import io.openslice.sol005nbi.api.vnf.VnfPkgmApi;
+import io.openslice.sol005nbi.model.nsd.CreateΝsDescriptorBody;
+import io.openslice.sol005nbi.model.vnf.CreateVnfPkgInfoRequestBody;
+import io.openslice.sol005nbi.model.vnf.VnfPackagesCreateVnfPkgInfoRequest;
+import io.openslice.sol005nbi.model.vnf.VnfPackagesVnfPkgInfo;
 
 
-public class GenericClient implements OSMClient{
+public class GenericSOL005Client implements OSMClient{
 
-	private static final Logger logger = LogManager.getLogger(GenericClient.class);
+	private static final Logger logger = LogManager.getLogger(GenericSOL005Client.class);
 			
 	private CloseableHttpClient httpClient;
 	private String manoProjectId;
@@ -73,17 +82,40 @@ public class GenericClient implements OSMClient{
 	private static Double manoAuthorizationTokenTimeout = 1.0;
 	private static String manoAuthorizationTokenID = null;
 
+	private VnfPkgmApi vnfPkgmApi;
+	io.openslice.sol005nbi.api.nsd.NsdDefaultApi defaultApitNsdApi;
+
+	private String tokenEndPoint;
+	
+	
 	public static void main(String args[]) {
 		System.out.println("Make your calls here");	
 	}
 	
-	public GenericClient(String apiEndpoint, String username, String password, String project_id) throws HttpStatusCodeException 
+	public GenericSOL005Client(String apiEndpoint, String username, String password, String project_id, String atokenEndPoint, String abaseBath) throws HttpStatusCodeException 
 	{
 		this.setMANOPassword(password);
 		this.setMANOUsername(username);
 		this.setMANOProjectId(project_id);
 		this.setMANOApiEndpoint(apiEndpoint);
+		
+		this.tokenEndPoint = atokenEndPoint;//
+		
 		OSM7ClientInit();
+		
+	    io.openslice.sol005nbi.api.vnf.VnfApiClient apiClientVnfPkgmApi = new io.openslice.sol005nbi.api.vnf.VnfApiClient( abaseBath );
+	    apiClientVnfPkgmApi.setBasePath("https://10.10.10.37:9999/osm/" + apiClientVnfPkgmApi.getBasePath() ) ;
+	    io.openslice.sol005nbi.auth.OAuth bAuth2 = (io.openslice.sol005nbi.auth.OAuth) apiClientVnfPkgmApi.getAuthentication( "bearerAuth" );
+	    bAuth2.setAccessToken( this.getManoAuthorizationTokenID() );
+	    
+		this.vnfPkgmApi = new VnfPkgmApi(apiClientVnfPkgmApi);
+		
+		
+		io.openslice.sol005nbi.api.nsd.NsdApiClient apiClientNsdApi = new io.openslice.sol005nbi.api.nsd.NsdApiClient();
+		apiClientNsdApi.setBasePath("https://10.10.10.37:9999/osm/" + apiClientNsdApi.getBasePath() ) ;
+		io.openslice.sol005nbi.auth.OAuth bAuth2nsd = (io.openslice.sol005nbi.auth.OAuth) apiClientNsdApi.getAuthentication( "bearerAuth" );
+		bAuth2nsd.setAccessToken( this.getManoAuthorizationTokenID() );		    
+		this.defaultApitNsdApi = new io.openslice.sol005nbi.api.nsd.NsdDefaultApi( apiClientNsdApi );
 	}
 	
 	public void closeConn()
@@ -213,15 +245,15 @@ public class GenericClient implements OSMClient{
         HttpEntity<String> request = new HttpEntity<String>(body, headers);            
         System.out.println(request.toString());
         ResponseEntity<String> entity = null;
-    	entity = restTemplate.exchange(this.getMANOApiEndpoint()+"/osm/admin/v1/tokens/",HttpMethod.POST, request, String.class);        
+    	entity = restTemplate.exchange( tokenEndPoint ,HttpMethod.POST, request, String.class);        
         System.out.printf(entity.getHeaders().toString());
         System.out.printf(entity.getBody());
         System.out.printf(entity.toString());
        
         JSONObject obj = new JSONObject(entity.getBody());
         this.setΜΑΝΟAuthorizationBasicHeader(obj.getString("id"));
-        GenericClient.setManoAuthorizationTokenTimeout(obj.getDouble("expires"));
-        GenericClient.setManoAuthorizationTokenID(obj.getString("id"));
+        GenericSOL005Client.setManoAuthorizationTokenTimeout(obj.getDouble("expires"));
+        GenericSOL005Client.setManoAuthorizationTokenID(obj.getString("id"));
         try {
 			httpClient.close();
 		} catch (IOException e) {
@@ -233,12 +265,12 @@ public class GenericClient implements OSMClient{
 
 	public String getManoAuthorizationTokenID() {
 		// TODO Auto-generated method stub
-		return GenericClient.manoAuthorizationTokenID;
+		return GenericSOL005Client.manoAuthorizationTokenID;
 	}
 
 	private static void setManoAuthorizationTokenID(String tokenID) {
 		// TODO Auto-generated method stub
-		GenericClient.manoAuthorizationTokenID=tokenID;		
+		GenericSOL005Client.manoAuthorizationTokenID=tokenID;		
 	}
 
 	public String getMANOApiEndpoint() {
@@ -317,7 +349,7 @@ public class GenericClient implements OSMClient{
 	 * @param manoAuthorizationTokenTimeout the manoAuthorizationTokenTimeout to set
 	 */
 	public static void setManoAuthorizationTokenTimeout(double manoAuthorizationTokenTimeout) {
-		GenericClient.manoAuthorizationTokenTimeout = manoAuthorizationTokenTimeout;
+		GenericSOL005Client.manoAuthorizationTokenTimeout = manoAuthorizationTokenTimeout;
 	}
 
 	@Override
@@ -370,8 +402,24 @@ public class GenericClient implements OSMClient{
 
 	@Override
 	public ResponseEntity<String> createVNFDPackage() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+	    CreateVnfPkgInfoRequestBody body = new CreateVnfPkgInfoRequestBody();
+	    VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest = new VnfPackagesCreateVnfPkgInfoRequest();
+		body.createVnfPkgInfoRequest(createVnfPkgInfoRequest );
+        ParameterizedTypeReference<String> returnType = new ParameterizedTypeReference<String>() {};
+		ResponseEntity<String> resultvnf = vnfPkgmApi.vnfPackagesPostResult(body, "application/json", "application/json", null, returnType);
+		
+		return resultvnf;
+	}
+	
+	
+	@Override
+	public ResponseEntity<String> uploadVNFDPackageContent(String vnfd_id, byte[] allBytes) throws IOException {
+		String vnfPkgId = vnfd_id;
+        ParameterizedTypeReference<String> returnType = new ParameterizedTypeReference<String>() {};
+	    return vnfPkgmApi.vnfPackagesVnfPkgIdPackageContentPutResult("application/json", vnfPkgId, null, allBytes, "application/zip", null, returnType);
+		
 	}
 
 	@Override
@@ -382,8 +430,13 @@ public class GenericClient implements OSMClient{
 
 	@Override
 	public ResponseEntity<String> createNSDPackage() {
-		// TODO Auto-generated method stub
-		return null;
+
+		CreateΝsDescriptorBody body = new CreateΝsDescriptorBody();
+        ParameterizedTypeReference<String> returnType = new ParameterizedTypeReference<String>() {};
+		ResponseEntity<String> resultvnf = defaultApitNsdApi.nsDescriptorsPostResult(body, "1.0", "application/json", "application/json", null, returnType);
+		
+		
+		return resultvnf;
 	}
 
 	@Override
@@ -404,11 +457,7 @@ public class GenericClient implements OSMClient{
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<String> uploadVNFDPackageContent(String vnfd_id, byte[] allBytes) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public ResponseEntity<String> uploadNSDPackageContent(String nsd_id, byte[] allBytes) throws IOException {

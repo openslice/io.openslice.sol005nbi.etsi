@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -18,7 +19,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import io.openslice.sol005nbi.model.nsd.Body;
+import io.openslice.sol005nbi.model.nsd.CreateΝsDescriptorBody;
 import io.openslice.sol005nbi.model.nsd.Body1;
 import io.openslice.sol005nbi.model.nsd.Body2;
 import io.openslice.sol005nbi.model.nsd.Body3;
@@ -27,7 +28,7 @@ import io.openslice.sol005nbi.model.nsd.InlineResponse200;
 import io.openslice.sol005nbi.model.nsd.InlineResponse2001;
 import io.openslice.sol005nbi.model.nsd.InlineResponse2002;
 import io.openslice.sol005nbi.model.nsd.InlineResponse2003;
-import io.openslice.sol005nbi.model.nsd.InlineResponse201;
+import io.openslice.sol005nbi.model.nsd.NsdInfo;
 import io.openslice.sol005nbi.model.nsd.InlineResponse2011;
 import io.openslice.sol005nbi.model.nsd.InlineResponse2012;
 
@@ -236,7 +237,7 @@ public class NsdDefaultApi {
      * @return InlineResponse201
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public InlineResponse201 nsDescriptorsNsdInfoIdGet(String nsdInfoId, String version, String accept, String authorization) throws RestClientException {
+    public NsdInfo nsDescriptorsNsdInfoIdGet(String nsdInfoId, String version, String accept, String authorization) throws RestClientException {
         Object postBody = null;
         // verify the required parameter 'nsdInfoId' is set
         if (nsdInfoId == null) {
@@ -274,7 +275,7 @@ public class NsdDefaultApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<InlineResponse201> returnType = new ParameterizedTypeReference<InlineResponse201>() {};
+        ParameterizedTypeReference<NsdInfo> returnType = new ParameterizedTypeReference<NsdInfo>() {};
         return apiClient.invokeAPI(path, HttpMethod.GET, queryParams, postBody, headerParams, formParams, haccept, contentType, authNames, returnType);
     }
     /**
@@ -621,7 +622,59 @@ public class NsdDefaultApi {
      * @return InlineResponse201
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public InlineResponse201 nsDescriptorsPost(Body body, String version, String accept, String contentType, String authorization) throws RestClientException {
+    public NsdInfo nsDescriptorsPost(CreateΝsDescriptorBody body, String version, String accept, String contentType, String authorization) throws RestClientException {
+    	ParameterizedTypeReference<NsdInfo> returnType = new ParameterizedTypeReference<NsdInfo>() {};
+    	ResponseEntity<NsdInfo> result = nsDescriptorsPostResult(body, version, accept, contentType, authorization, returnType);
+    	return result.getBody();
+    	
+//        Object postBody = body;
+//        // verify the required parameter 'body' is set
+//        if (body == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'body' when calling nsDescriptorsPost");
+//        }
+//        // verify the required parameter 'version' is set
+//        if (version == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'version' when calling nsDescriptorsPost");
+//        }
+//        // verify the required parameter 'accept' is set
+//        if (accept == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'accept' when calling nsDescriptorsPost");
+//        }
+//        // verify the required parameter 'contentType' is set
+//        if (contentType == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'contentType' when calling nsDescriptorsPost");
+//        }
+//        String path = UriComponentsBuilder.fromPath("/ns_descriptors").build().toUriString();
+//        
+//        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+//        final HttpHeaders headerParams = new HttpHeaders();
+//        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+//        if (authorization != null)
+//            headerParams.add("Authorization", apiClient.parameterToString(authorization));
+//        if (version != null)
+//            headerParams.add("Version", apiClient.parameterToString(version));
+//        if (accept != null)
+//            headerParams.add("Accept", apiClient.parameterToString(accept));
+//        if (contentType != null)
+//            headerParams.add("Content-Type", apiClient.parameterToString(contentType));
+//
+//        final String[] accepts = { 
+//            "application/json"
+//         };
+//        final List<MediaType> haccept = apiClient.selectHeaderAccept(accepts);
+//        final String[] contentTypes = { 
+//            "application/json"
+//         };
+//        final MediaType hcontentType = apiClient.selectHeaderContentType(contentTypes);
+//
+//        String[] authNames = new String[] {  };
+//
+//        ParameterizedTypeReference<InlineResponse201> returnType = new ParameterizedTypeReference<InlineResponse201>() {};
+//        return apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, haccept, hcontentType, authNames, returnType);
+    }
+    
+    
+    public <T> ResponseEntity<T>  nsDescriptorsPostResult(CreateΝsDescriptorBody body, String version, String accept, String contentType, String authorization, ParameterizedTypeReference<T> returnType) throws RestClientException {
         Object postBody = body;
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -664,9 +717,10 @@ public class NsdDefaultApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<InlineResponse201> returnType = new ParameterizedTypeReference<InlineResponse201>() {};
-        return apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, haccept, hcontentType, authNames, returnType);
+        return apiClient.invokeAPIResponseEntity(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, haccept, hcontentType, authNames, returnType);
     }
+    
+    
     /**
      * Query information about multiple PNF descriptor resources.
      * \&quot;The GET method queries information about multiple PNF descriptor resources.\&quot; 

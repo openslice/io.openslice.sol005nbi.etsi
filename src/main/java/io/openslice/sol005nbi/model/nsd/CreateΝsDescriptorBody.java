@@ -22,11 +22,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 @Schema(description = "This type creates a completely new NS descriptor resource. ")
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-03-31T22:46:27.985+03:00[Europe/Athens]")
-public class Body {
+public class CreateΝsDescriptorBody {
   @JsonProperty("userDefinedData")
   private Object userDefinedData = null;
 
-  public Body userDefinedData(Object userDefinedData) {
+  public CreateΝsDescriptorBody userDefinedData(Object userDefinedData) {
     this.userDefinedData = userDefinedData;
     return this;
   }
@@ -53,7 +53,7 @@ public class Body {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Body body = (Body) o;
+    CreateΝsDescriptorBody body = (CreateΝsDescriptorBody) o;
     return Objects.equals(this.userDefinedData, body.userDefinedData);
   }
 

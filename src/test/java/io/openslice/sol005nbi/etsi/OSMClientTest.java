@@ -38,7 +38,12 @@ public class OSMClientTest {
 	public void runMe(){
 		
 		
-	    GenericClient osm7Clientent = new GenericClient("https://10.10.10.37:9999","admin","osmadmin#$","admin");
+	    GenericSOL005Client osm7Clientent = new GenericSOL005Client("https://10.10.10.37:9999",
+	    		"admin",
+	    		"osmadmin#$",
+	    		"admin", 
+	    		"https://10.10.10.37:9999/osm/admin/v1/tokens/",
+	    		"/vnfpkgm/v1");
 
 
 	//{vnf: [ {member-vnf-index: "1", vdu:[ {id: mgmtVM, interface: [{name: mgmtVM-eth0, floating-ip-required: True }]} ] } ], vld: [ {name: mgmtnet, vim-network-name: OSMFIVE_selfservice01} ] }    
@@ -59,23 +64,23 @@ public class OSMClientTest {
 			System.out.println("=== LIST VNFDs POJO object response: " + v.toString());				
 		}
 	    
-	    CreateVnfPkgInfoRequestBody body = new CreateVnfPkgInfoRequestBody();
-	    VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest = new VnfPackagesCreateVnfPkgInfoRequest();
-		body.createVnfPkgInfoRequest(createVnfPkgInfoRequest );
-		VnfPackagesVnfPkgInfo resultvnf = vnfPkgmApi.vnfPackagesPost(body, "application/json", "application/json", null);
-	    String vnfPkgId = resultvnf.getVnfdId();
-	    if ( vnfPkgId == null) {
-	    	 vnfPkgId = resultvnf.getId(); 
-	    }
-		File file = new File("src/test/resources/cirros_vnf.tar.gz");
-		byte[] fileContent;
-		try {
-			fileContent = Files.readAllBytes(file.toPath());
-			vnfPkgmApi.vnfPackagesVnfPkgIdPackageContentPut("application/json", vnfPkgId, file, fileContent, "application/zip", null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//	    CreateVnfPkgInfoRequestBody body = new CreateVnfPkgInfoRequestBody();
+//	    VnfPackagesCreateVnfPkgInfoRequest createVnfPkgInfoRequest = new VnfPackagesCreateVnfPkgInfoRequest();
+//		body.createVnfPkgInfoRequest(createVnfPkgInfoRequest );
+//		VnfPackagesVnfPkgInfo resultvnf = vnfPkgmApi.vnfPackagesPost(body, "application/json", "application/json", null);
+//	    String vnfPkgId = resultvnf.getVnfdId();
+//	    if ( vnfPkgId == null) {
+//	    	 vnfPkgId = resultvnf.getId(); 
+//	    }
+//		File file = new File("src/test/resources/cirros_vnf.tar.gz");
+//		byte[] fileContent;
+//		try {
+//			fileContent = Files.readAllBytes(file.toPath());
+//			vnfPkgmApi.vnfPackagesVnfPkgIdPackageContentPut("application/json", vnfPkgId, file, fileContent, "application/zip", null);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	    
 
 	    io.openslice.sol005nbi.api.nsd.NsdApiClient apiClientNsdApi = new io.openslice.sol005nbi.api.nsd.NsdApiClient();

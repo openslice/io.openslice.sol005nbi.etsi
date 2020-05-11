@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 @Schema(description = "This type represents a response for the query NSD operation. ")
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-03-31T22:46:27.985+03:00[Europe/Athens]")
-public class InlineResponse201 {
+public class NsdInfo {
   @JsonProperty("id")
   private String id = null;
 
@@ -208,7 +208,7 @@ public class InlineResponse201 {
   @JsonProperty("_links")
   private NsDescriptorsLinks _links = null;
 
-  public InlineResponse201 id(String id) {
+  public NsdInfo id(String id) {
     this.id = id;
     return this;
   }
@@ -226,7 +226,7 @@ public class InlineResponse201 {
     this.id = id;
   }
 
-  public InlineResponse201 nsdId(String nsdId) {
+  public NsdInfo nsdId(String nsdId) {
     this.nsdId = nsdId;
     return this;
   }
@@ -244,7 +244,7 @@ public class InlineResponse201 {
     this.nsdId = nsdId;
   }
 
-  public InlineResponse201 nsdName(String nsdName) {
+  public NsdInfo nsdName(String nsdName) {
     this.nsdName = nsdName;
     return this;
   }
@@ -262,7 +262,7 @@ public class InlineResponse201 {
     this.nsdName = nsdName;
   }
 
-  public InlineResponse201 nsdVersion(String nsdVersion) {
+  public NsdInfo nsdVersion(String nsdVersion) {
     this.nsdVersion = nsdVersion;
     return this;
   }
@@ -280,7 +280,7 @@ public class InlineResponse201 {
     this.nsdVersion = nsdVersion;
   }
 
-  public InlineResponse201 nsdDesigner(String nsdDesigner) {
+  public NsdInfo nsdDesigner(String nsdDesigner) {
     this.nsdDesigner = nsdDesigner;
     return this;
   }
@@ -298,7 +298,7 @@ public class InlineResponse201 {
     this.nsdDesigner = nsdDesigner;
   }
 
-  public InlineResponse201 nsdInvariantId(String nsdInvariantId) {
+  public NsdInfo nsdInvariantId(String nsdInvariantId) {
     this.nsdInvariantId = nsdInvariantId;
     return this;
   }
@@ -316,12 +316,12 @@ public class InlineResponse201 {
     this.nsdInvariantId = nsdInvariantId;
   }
 
-  public InlineResponse201 vnfPkgIds(List<String> vnfPkgIds) {
+  public NsdInfo vnfPkgIds(List<String> vnfPkgIds) {
     this.vnfPkgIds = vnfPkgIds;
     return this;
   }
 
-  public InlineResponse201 addVnfPkgIdsItem(String vnfPkgIdsItem) {
+  public NsdInfo addVnfPkgIdsItem(String vnfPkgIdsItem) {
     if (this.vnfPkgIds == null) {
       this.vnfPkgIds = new ArrayList<>();
     }
@@ -342,12 +342,12 @@ public class InlineResponse201 {
     this.vnfPkgIds = vnfPkgIds;
   }
 
-  public InlineResponse201 pnfdInfoIds(List<String> pnfdInfoIds) {
+  public NsdInfo pnfdInfoIds(List<String> pnfdInfoIds) {
     this.pnfdInfoIds = pnfdInfoIds;
     return this;
   }
 
-  public InlineResponse201 addPnfdInfoIdsItem(String pnfdInfoIdsItem) {
+  public NsdInfo addPnfdInfoIdsItem(String pnfdInfoIdsItem) {
     if (this.pnfdInfoIds == null) {
       this.pnfdInfoIds = new ArrayList<>();
     }
@@ -368,12 +368,12 @@ public class InlineResponse201 {
     this.pnfdInfoIds = pnfdInfoIds;
   }
 
-  public InlineResponse201 nestedNsdInfoIds(List<String> nestedNsdInfoIds) {
+  public NsdInfo nestedNsdInfoIds(List<String> nestedNsdInfoIds) {
     this.nestedNsdInfoIds = nestedNsdInfoIds;
     return this;
   }
 
-  public InlineResponse201 addNestedNsdInfoIdsItem(String nestedNsdInfoIdsItem) {
+  public NsdInfo addNestedNsdInfoIdsItem(String nestedNsdInfoIdsItem) {
     if (this.nestedNsdInfoIds == null) {
       this.nestedNsdInfoIds = new ArrayList<>();
     }
@@ -394,7 +394,7 @@ public class InlineResponse201 {
     this.nestedNsdInfoIds = nestedNsdInfoIds;
   }
 
-  public InlineResponse201 archiveSecurityOption(ArchiveSecurityOptionEnum archiveSecurityOption) {
+  public NsdInfo archiveSecurityOption(ArchiveSecurityOptionEnum archiveSecurityOption) {
     this.archiveSecurityOption = archiveSecurityOption;
     return this;
   }
@@ -412,7 +412,7 @@ public class InlineResponse201 {
     this.archiveSecurityOption = archiveSecurityOption;
   }
 
-  public InlineResponse201 signingCertificate(String signingCertificate) {
+  public NsdInfo signingCertificate(String signingCertificate) {
     this.signingCertificate = signingCertificate;
     return this;
   }
@@ -430,12 +430,12 @@ public class InlineResponse201 {
     this.signingCertificate = signingCertificate;
   }
 
-  public InlineResponse201 artifacts(List<NsDescriptorsArtifacts> artifacts) {
+  public NsdInfo artifacts(List<NsDescriptorsArtifacts> artifacts) {
     this.artifacts = artifacts;
     return this;
   }
 
-  public InlineResponse201 addArtifactsItem(NsDescriptorsArtifacts artifactsItem) {
+  public NsdInfo addArtifactsItem(NsDescriptorsArtifacts artifactsItem) {
     if (this.artifacts == null) {
       this.artifacts = new ArrayList<>();
     }
@@ -456,7 +456,7 @@ public class InlineResponse201 {
     this.artifacts = artifacts;
   }
 
-  public InlineResponse201 nsdOnboardingState(NsdOnboardingStateEnum nsdOnboardingState) {
+  public NsdInfo nsdOnboardingState(NsdOnboardingStateEnum nsdOnboardingState) {
     this.nsdOnboardingState = nsdOnboardingState;
     return this;
   }
@@ -474,7 +474,7 @@ public class InlineResponse201 {
     this.nsdOnboardingState = nsdOnboardingState;
   }
 
-  public InlineResponse201 onboardingFailureDetails(InlineResponse400 onboardingFailureDetails) {
+  public NsdInfo onboardingFailureDetails(InlineResponse400 onboardingFailureDetails) {
     this.onboardingFailureDetails = onboardingFailureDetails;
     return this;
   }
@@ -492,7 +492,7 @@ public class InlineResponse201 {
     this.onboardingFailureDetails = onboardingFailureDetails;
   }
 
-  public InlineResponse201 nsdOperationalState(NsdOperationalStateEnum nsdOperationalState) {
+  public NsdInfo nsdOperationalState(NsdOperationalStateEnum nsdOperationalState) {
     this.nsdOperationalState = nsdOperationalState;
     return this;
   }
@@ -510,7 +510,7 @@ public class InlineResponse201 {
     this.nsdOperationalState = nsdOperationalState;
   }
 
-  public InlineResponse201 nsdUsageState(NsdUsageStateEnum nsdUsageState) {
+  public NsdInfo nsdUsageState(NsdUsageStateEnum nsdUsageState) {
     this.nsdUsageState = nsdUsageState;
     return this;
   }
@@ -528,7 +528,7 @@ public class InlineResponse201 {
     this.nsdUsageState = nsdUsageState;
   }
 
-  public InlineResponse201 userDefinedData(Object userDefinedData) {
+  public NsdInfo userDefinedData(Object userDefinedData) {
     this.userDefinedData = userDefinedData;
     return this;
   }
@@ -546,7 +546,7 @@ public class InlineResponse201 {
     this.userDefinedData = userDefinedData;
   }
 
-  public InlineResponse201 _links(NsDescriptorsLinks _links) {
+  public NsdInfo _links(NsDescriptorsLinks _links) {
     this._links = _links;
     return this;
   }
@@ -573,7 +573,7 @@ public class InlineResponse201 {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    InlineResponse201 inlineResponse201 = (InlineResponse201) o;
+    NsdInfo inlineResponse201 = (NsdInfo) o;
     return Objects.equals(this.id, inlineResponse201.id) &&
         Objects.equals(this.nsdId, inlineResponse201.nsdId) &&
         Objects.equals(this.nsdName, inlineResponse201.nsdName) &&

@@ -13,4 +13,8 @@ public class VnfApiClient extends ApiClient {
 	public VnfApiClient() {
 		setBasePath(basePath);
 	}
+	
+	public VnfApiClient( String abasePath ) {
+		setBasePath( abasePath );
+	}
 }

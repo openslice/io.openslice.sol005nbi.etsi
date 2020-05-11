@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -314,6 +315,8 @@ public class VnfPkgmApi {
         ParameterizedTypeReference<List<VnfPackagesVnfPkgInfo>> returnType = new ParameterizedTypeReference<List<VnfPackagesVnfPkgInfo>>() {};
         return apiClient.invokeAPI(path, HttpMethod.GET, queryParams, postBody, headerParams, formParams,  headerAccept, contentType, authNames, returnType);
     }
+    
+    
     /**
      * Create a new individual VNF package resource.
      * The POST method creates a new individual VNF package resource. 
@@ -326,6 +329,27 @@ public class VnfPkgmApi {
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
     public VnfPackagesVnfPkgInfo vnfPackagesPost(CreateVnfPkgInfoRequestBody body, String accept, String contentType, String authorization) throws RestClientException {
+    	
+
+        ParameterizedTypeReference<VnfPackagesVnfPkgInfo> returnType = new ParameterizedTypeReference<VnfPackagesVnfPkgInfo>() {};
+    	ResponseEntity<VnfPackagesVnfPkgInfo> result = vnfPackagesPostResult(body, accept, contentType, authorization, returnType);
+    	
+    	return result.getBody();
+    	
+    }
+    
+    /**
+     * Create a new individual VNF package resource.
+     * The POST method creates a new individual VNF package resource. 
+     * <p><b>201</b> - 201 Created             An individual VNF package resource has been created successfully. The response body shall contain a representation of the new individual VNF package resource, as defined in clause 9.5.2.4. The HTTP response shall include a \&quot;Location\&quot; HTTP header that contains the resource URI of the individual VNF package resource. 
+     * @param body The body parameter
+     * @param accept Content-Types that are acceptable for the response. Reference: IETF RFC 7231 
+     * @param contentType The MIME type of the body of the request. Reference: IETF RFC 7231 
+     * @param authorization The authorization token for the request. Reference: IETF RFC 7235 
+     * @return Object
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public <T> ResponseEntity<T> vnfPackagesPostResult(CreateVnfPkgInfoRequestBody body, String accept, String contentType, String authorization, ParameterizedTypeReference<T> returnType) throws RestClientException {
     	CreateVnfPkgInfoRequestBody postBody = body;
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -362,9 +386,10 @@ public class VnfPkgmApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<VnfPackagesVnfPkgInfo> returnType = new ParameterizedTypeReference<VnfPackagesVnfPkgInfo>() {};
-        return apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams,  headerAccept, hcontentType, authNames, returnType);
+        return apiClient.invokeAPIResponseEntity(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams,  headerAccept, hcontentType, authNames, returnType);
     }
+    
+    
     /**
      * Fetch individual VNF package artifact.
      * The GET method fetches the content of an artifact within a VNF package. This method shall follow the provisions specified in the  Tables 9.4.7.3.2-1 and 9.4.7.3.2-2 for URI query parameters, request and response data structures, and response codes. 
@@ -608,6 +633,78 @@ public class VnfPkgmApi {
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
     public void vnfPackagesVnfPkgIdPackageContentPut(String accept, String vnfPkgId, File file, byte[] allBytes, String contentType, String authorization) throws RestClientException {
+    	
+    	ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
+    	ResponseEntity<Void> result = vnfPackagesVnfPkgIdPackageContentPutResult(accept, vnfPkgId, file, allBytes, contentType, authorization, returnType);
+    	
+//        Object postBody = allBytes;
+//        // verify the required parameter 'accept' is set
+//        if (accept == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'accept' when calling vnfPackagesVnfPkgIdPackageContentPut");
+//        }
+//        // verify the required parameter 'vnfPkgId' is set
+//        if (vnfPkgId == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'vnfPkgId' when calling vnfPackagesVnfPkgIdPackageContentPut");
+//        }
+//        // create path and map variables
+//        final Map<String, Object> uriVariables = new HashMap<String, Object>();
+//        uriVariables.put("vnfPkgId", vnfPkgId);
+//        String path = UriComponentsBuilder.fromPath("/vnf_packages/{vnfPkgId}/package_content").buildAndExpand(uriVariables).toUriString();
+//        
+//        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+//        final HttpHeaders headerParams = new HttpHeaders();
+//        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+//        
+//        if (authorization != null)
+//            headerParams.add("Authorization", apiClient.parameterToString(authorization));
+//        if (file != null)
+//            formParams.add("file", new FileSystemResource(file));
+//
+//        final String[] accepts = { 
+//            "application/json"
+//         };
+//        if (accept != null)
+//        	accepts[0] = accept;
+//
+//        final List<MediaType> headerAccept = apiClient.selectHeaderAccept(accepts);
+//        
+//        final String[] contentTypes = { 
+//                "multipart/form-data"
+//             };
+//
+//        if (contentType != null) {
+//        	contentTypes[0] = contentType;
+//        }
+//        
+//        final MediaType acontentType = apiClient.selectHeaderContentType(contentTypes);
+//
+//        String[] authNames = new String[] {  };
+//
+//        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
+//        apiClient.invokeAPI(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams,  headerAccept, acontentType, authNames, returnType);
+    }
+    
+    
+    /**
+     * Upload a VNF package by providing the content of the VNF package.
+     * The PUT method uploads the content of a VNF package. This method shall follow the provisions specified in the  Tables 9.4.5.3.3-1 and 9.4.5.3.3-2 for URI query parameters, request and response data structures, and response codes. 
+     * <p><b>202</b> - 202 Accepted The VNF package was accepted for uploading, but the processing has not been completed. It is expected to take some time for processing. The response body shall be empty. 
+     * <p><b>400</b> - Bad Request. Error: Invalid attribute-based filtering parameters. The response body shall contain a ProblemDetails structure, in which the \&quot;detail\&quot; attribute should convey more information about the error.        
+     * <p><b>401</b> - Unauthorized If the request contains no access token even though one is required, or if the request contains an authorization token that is invalid (e.g. expired or revoked), the API producer should respond with this response. The details of the error shall be returned in the WWW-Authenticate HTTP header, as defined in IETF RFC 6750 and IETF RFC 7235. The ProblemDetails structure may be provided. 
+     * <p><b>403</b> - Forbidden If the API consumer is not allowed to perform a particular request to a particular resource, the API producer shall respond with this response code. The \&quot;ProblemDetails\&quot; structure shall be provided.  It should include in the \&quot;detail\&quot; attribute information about the source of the problem, and may indicate how to solve it. 
+     * <p><b>404</b> - Not Found If the API producer did not find a current representation for the resource addressed by the URI passed in the request, or is not willing to disclose that one exists, it shall respond with this response code.  The \&quot;ProblemDetails\&quot; structure may be provided, including in the \&quot;detail\&quot; attribute information about the source of the problem, e.g. a wrong resource URI variable. 
+     * <p><b>405</b> - Method Not Allowed If a particular HTTP method is not supported for a particular resource, the API producer shall respond with this response code. The \&quot;ProblemDetails\&quot; structure may be omitted in that case. 
+     * <p><b>406</b> - If the \&quot;Accept\&quot; header does not contain at least one name of a content type for which the NFVO can provide a representation of the VNFD, the NFVO shall respond with this response code.         
+     * <p><b>409</b> - Conflict. Error: The operation cannot be executed currently, due to a conflict with the state of the resource. Typically, this is due to the fact that the on boarding state of the VNF package resource is not CREATED . The response body shall contain a ProblemDetails structure, in which the \&quot;detail\&quot; attribute shall convey more information about the error. 
+     * <p><b>500</b> - Internal Server Error If there is an application error not related to the client&#x27;s input that cannot be easily mapped to any other HTTP response code (\&quot;catch all error\&quot;), the API producer shall respond withthis response code. The ProblemDetails structure shall be provided, and shall include in the \&quot;detail\&quot; attribute more information about the source of the problem. 
+     * <p><b>503</b> - Service Unavailable If the API producer encounters an internal overload situation of itself or of a system it relies on, it should respond with this response code, following the provisions in IETF RFC 7231 [13] for the use of the Retry-After HTTP header and for the alternative to refuse the connection. The \&quot;ProblemDetails\&quot; structure may be omitted. 
+     * @param accept Content-Types that are acceptable for the response. 
+     * @param vnfPkgId Identifier of the on-boarded VNF package. The identifier is allocated by the NFVO. 
+     * @param file The file parameter
+     * @param authorization The authorization token for the request. Reference: IETF RFC 7235 
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public <T> ResponseEntity<T>  vnfPackagesVnfPkgIdPackageContentPutResult(String accept, String vnfPkgId, File file, byte[] allBytes, String contentType, String authorization, ParameterizedTypeReference<T> returnType) throws RestClientException {
         Object postBody = allBytes;
         // verify the required parameter 'accept' is set
         if (accept == null) {
@@ -651,9 +748,10 @@ public class VnfPkgmApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
-        apiClient.invokeAPI(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams,  headerAccept, acontentType, authNames, returnType);
+        return apiClient.invokeAPIResponseEntity(path, HttpMethod.PUT, queryParams, postBody, headerParams, formParams,  headerAccept, acontentType, authNames, returnType);
     }
+    
+    
     /**
      * Upload a VNF package by providing the address information of the VNF package.
      * The POST method provides the information for the NFVO to get the content of a VNF package. This method shall follow the provisions specified in the  Tables 9.4.6.3.1-1 and 9.4.6.3.1-2 for URI query parameters, request and response data structures, and response codes.         
