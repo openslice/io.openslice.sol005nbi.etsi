@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-03-28T00:48:29.393+02:00[Europe/Athens]")
-public class Body1 {
+public class InstantiateNsRequest {
   @JsonProperty("nsFlavourId")
   private String nsFlavourId = null;
 
@@ -61,7 +61,7 @@ public class Body1 {
   @JsonProperty("additionalAffinityOrAntiAffinityRule")
   private List<NsInstancesNsInstanceAdditionalAffinityOrAntiAffinityRule> additionalAffinityOrAntiAffinityRule = null;
 
-  public Body1 nsFlavourId(String nsFlavourId) {
+  public InstantiateNsRequest nsFlavourId(String nsFlavourId) {
     this.nsFlavourId = nsFlavourId;
     return this;
   }
@@ -79,12 +79,12 @@ public class Body1 {
     this.nsFlavourId = nsFlavourId;
   }
 
-  public Body1 sapData(List<NsInstancesnsInstanceIdinstantiateSapData> sapData) {
+  public InstantiateNsRequest sapData(List<NsInstancesnsInstanceIdinstantiateSapData> sapData) {
     this.sapData = sapData;
     return this;
   }
 
-  public Body1 addSapDataItem(NsInstancesnsInstanceIdinstantiateSapData sapDataItem) {
+  public InstantiateNsRequest addSapDataItem(NsInstancesnsInstanceIdinstantiateSapData sapDataItem) {
     if (this.sapData == null) {
       this.sapData = new ArrayList<>();
     }
@@ -105,12 +105,12 @@ public class Body1 {
     this.sapData = sapData;
   }
 
-  public Body1 addpnfData(List<NsInstancesnsInstanceIdinstantiateAddpnfData> addpnfData) {
+  public InstantiateNsRequest addpnfData(List<NsInstancesnsInstanceIdinstantiateAddpnfData> addpnfData) {
     this.addpnfData = addpnfData;
     return this;
   }
 
-  public Body1 addAddpnfDataItem(NsInstancesnsInstanceIdinstantiateAddpnfData addpnfDataItem) {
+  public InstantiateNsRequest addAddpnfDataItem(NsInstancesnsInstanceIdinstantiateAddpnfData addpnfDataItem) {
     if (this.addpnfData == null) {
       this.addpnfData = new ArrayList<>();
     }
@@ -131,12 +131,12 @@ public class Body1 {
     this.addpnfData = addpnfData;
   }
 
-  public Body1 vnfInstanceData(List<NsInstancesnsInstanceIdinstantiateVnfInstanceData> vnfInstanceData) {
+  public InstantiateNsRequest vnfInstanceData(List<NsInstancesnsInstanceIdinstantiateVnfInstanceData> vnfInstanceData) {
     this.vnfInstanceData = vnfInstanceData;
     return this;
   }
 
-  public Body1 addVnfInstanceDataItem(NsInstancesnsInstanceIdinstantiateVnfInstanceData vnfInstanceDataItem) {
+  public InstantiateNsRequest addVnfInstanceDataItem(NsInstancesnsInstanceIdinstantiateVnfInstanceData vnfInstanceDataItem) {
     if (this.vnfInstanceData == null) {
       this.vnfInstanceData = new ArrayList<>();
     }
@@ -157,12 +157,12 @@ public class Body1 {
     this.vnfInstanceData = vnfInstanceData;
   }
 
-  public Body1 nestedNsInstanceData(List<NsInstancesnsInstanceIdinstantiateNestedNsInstanceData> nestedNsInstanceData) {
+  public InstantiateNsRequest nestedNsInstanceData(List<NsInstancesnsInstanceIdinstantiateNestedNsInstanceData> nestedNsInstanceData) {
     this.nestedNsInstanceData = nestedNsInstanceData;
     return this;
   }
 
-  public Body1 addNestedNsInstanceDataItem(NsInstancesnsInstanceIdinstantiateNestedNsInstanceData nestedNsInstanceDataItem) {
+  public InstantiateNsRequest addNestedNsInstanceDataItem(NsInstancesnsInstanceIdinstantiateNestedNsInstanceData nestedNsInstanceDataItem) {
     if (this.nestedNsInstanceData == null) {
       this.nestedNsInstanceData = new ArrayList<>();
     }
@@ -183,12 +183,12 @@ public class Body1 {
     this.nestedNsInstanceData = nestedNsInstanceData;
   }
 
-  public Body1 locationConstraints(List<NsInstancesnsInstanceIdinstantiateLocationConstraints1> locationConstraints) {
+  public InstantiateNsRequest locationConstraints(List<NsInstancesnsInstanceIdinstantiateLocationConstraints1> locationConstraints) {
     this.locationConstraints = locationConstraints;
     return this;
   }
 
-  public Body1 addLocationConstraintsItem(NsInstancesnsInstanceIdinstantiateLocationConstraints1 locationConstraintsItem) {
+  public InstantiateNsRequest addLocationConstraintsItem(NsInstancesnsInstanceIdinstantiateLocationConstraints1 locationConstraintsItem) {
     if (this.locationConstraints == null) {
       this.locationConstraints = new ArrayList<>();
     }
@@ -209,7 +209,7 @@ public class Body1 {
     this.locationConstraints = locationConstraints;
   }
 
-  public Body1 additionalParamsForNs(Object additionalParamsForNs) {
+  public InstantiateNsRequest additionalParamsForNs(Object additionalParamsForNs) {
     this.additionalParamsForNs = additionalParamsForNs;
     return this;
   }
@@ -227,12 +227,12 @@ public class Body1 {
     this.additionalParamsForNs = additionalParamsForNs;
   }
 
-  public Body1 additionalParamForNestedNs(List<NsInstancesnsInstanceIdinstantiateAdditionalParamForNestedNs> additionalParamForNestedNs) {
+  public InstantiateNsRequest additionalParamForNestedNs(List<NsInstancesnsInstanceIdinstantiateAdditionalParamForNestedNs> additionalParamForNestedNs) {
     this.additionalParamForNestedNs = additionalParamForNestedNs;
     return this;
   }
 
-  public Body1 addAdditionalParamForNestedNsItem(NsInstancesnsInstanceIdinstantiateAdditionalParamForNestedNs additionalParamForNestedNsItem) {
+  public InstantiateNsRequest addAdditionalParamForNestedNsItem(NsInstancesnsInstanceIdinstantiateAdditionalParamForNestedNs additionalParamForNestedNsItem) {
     if (this.additionalParamForNestedNs == null) {
       this.additionalParamForNestedNs = new ArrayList<>();
     }
@@ -253,12 +253,12 @@ public class Body1 {
     this.additionalParamForNestedNs = additionalParamForNestedNs;
   }
 
-  public Body1 additionalParamsForVnf(List<NsInstancesnsInstanceIdinstantiateAdditionalParamsForVnf> additionalParamsForVnf) {
+  public InstantiateNsRequest additionalParamsForVnf(List<NsInstancesnsInstanceIdinstantiateAdditionalParamsForVnf> additionalParamsForVnf) {
     this.additionalParamsForVnf = additionalParamsForVnf;
     return this;
   }
 
-  public Body1 addAdditionalParamsForVnfItem(NsInstancesnsInstanceIdinstantiateAdditionalParamsForVnf additionalParamsForVnfItem) {
+  public InstantiateNsRequest addAdditionalParamsForVnfItem(NsInstancesnsInstanceIdinstantiateAdditionalParamsForVnf additionalParamsForVnfItem) {
     if (this.additionalParamsForVnf == null) {
       this.additionalParamsForVnf = new ArrayList<>();
     }
@@ -279,7 +279,7 @@ public class Body1 {
     this.additionalParamsForVnf = additionalParamsForVnf;
   }
 
-  public Body1 startTime(Object startTime) {
+  public InstantiateNsRequest startTime(Object startTime) {
     this.startTime = startTime;
     return this;
   }
@@ -297,7 +297,7 @@ public class Body1 {
     this.startTime = startTime;
   }
 
-  public Body1 nsInstantiationLevelId(String nsInstantiationLevelId) {
+  public InstantiateNsRequest nsInstantiationLevelId(String nsInstantiationLevelId) {
     this.nsInstantiationLevelId = nsInstantiationLevelId;
     return this;
   }
@@ -315,12 +315,12 @@ public class Body1 {
     this.nsInstantiationLevelId = nsInstantiationLevelId;
   }
 
-  public Body1 additionalAffinityOrAntiAffinityRule(List<NsInstancesNsInstanceAdditionalAffinityOrAntiAffinityRule> additionalAffinityOrAntiAffinityRule) {
+  public InstantiateNsRequest additionalAffinityOrAntiAffinityRule(List<NsInstancesNsInstanceAdditionalAffinityOrAntiAffinityRule> additionalAffinityOrAntiAffinityRule) {
     this.additionalAffinityOrAntiAffinityRule = additionalAffinityOrAntiAffinityRule;
     return this;
   }
 
-  public Body1 addAdditionalAffinityOrAntiAffinityRuleItem(NsInstancesNsInstanceAdditionalAffinityOrAntiAffinityRule additionalAffinityOrAntiAffinityRuleItem) {
+  public InstantiateNsRequest addAdditionalAffinityOrAntiAffinityRuleItem(NsInstancesNsInstanceAdditionalAffinityOrAntiAffinityRule additionalAffinityOrAntiAffinityRuleItem) {
     if (this.additionalAffinityOrAntiAffinityRule == null) {
       this.additionalAffinityOrAntiAffinityRule = new ArrayList<>();
     }
@@ -350,7 +350,7 @@ public class Body1 {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Body1 body1 = (Body1) o;
+    InstantiateNsRequest body1 = (InstantiateNsRequest) o;
     return Objects.equals(this.nsFlavourId, body1.nsFlavourId) &&
         Objects.equals(this.sapData, body1.sapData) &&
         Objects.equals(this.addpnfData, body1.addpnfData) &&

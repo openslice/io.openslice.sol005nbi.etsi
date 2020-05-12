@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-03-28T00:48:29.393+02:00[Europe/Athens]")
-public class Body {
+public class CreateNsRequest {
   @JsonProperty("nsdId")
   private String nsdId = null;
 
@@ -32,7 +32,7 @@ public class Body {
   @JsonProperty("nsDescription")
   private String nsDescription = null;
 
-  public Body nsdId(String nsdId) {
+  public CreateNsRequest nsdId(String nsdId) {
     this.nsdId = nsdId;
     return this;
   }
@@ -50,7 +50,7 @@ public class Body {
     this.nsdId = nsdId;
   }
 
-  public Body nsName(String nsName) {
+  public CreateNsRequest nsName(String nsName) {
     this.nsName = nsName;
     return this;
   }
@@ -68,7 +68,7 @@ public class Body {
     this.nsName = nsName;
   }
 
-  public Body nsDescription(String nsDescription) {
+  public CreateNsRequest nsDescription(String nsDescription) {
     this.nsDescription = nsDescription;
     return this;
   }
@@ -95,7 +95,7 @@ public class Body {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Body body = (Body) o;
+    CreateNsRequest body = (CreateNsRequest) o;
     return Objects.equals(this.nsdId, body.nsdId) &&
         Objects.equals(this.nsName, body.nsName) &&
         Objects.equals(this.nsDescription, body.nsDescription);

@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -17,8 +18,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import io.openslice.sol005nbi.model.nslcm.Body;
-import io.openslice.sol005nbi.model.nslcm.Body1;
+import io.openslice.sol005nbi.model.nslcm.CreateNsRequest;
+import io.openslice.sol005nbi.model.nslcm.InstantiateNsRequest;
 import io.openslice.sol005nbi.model.nslcm.Body2;
 import io.openslice.sol005nbi.model.nslcm.Body3;
 import io.openslice.sol005nbi.model.nslcm.Body4;
@@ -389,7 +390,65 @@ public class NslcmDefaultApi {
      * @param authorization The authorization token for the request. Reference: IETF RFC 7235 
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public void nsInstancesNsInstanceIdInstantiatePost(Body1 body, String accept, String contentType, String version, String nsInstanceId, String authorization) throws RestClientException {
+    public void nsInstancesNsInstanceIdInstantiatePost(InstantiateNsRequest body, String accept, String contentType, String version, String nsInstanceId, String authorization) throws RestClientException {
+
+        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
+        nsInstancesNsInstanceIdInstantiatePostResult(body, accept, contentType, version, nsInstanceId, authorization, returnType);
+    	
+//    	Object postBody = body;
+//        // verify the required parameter 'body' is set
+//        if (body == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'body' when calling nsInstancesNsInstanceIdInstantiatePost");
+//        }
+//        // verify the required parameter 'accept' is set
+//        if (accept == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'accept' when calling nsInstancesNsInstanceIdInstantiatePost");
+//        }
+//        // verify the required parameter 'contentType' is set
+//        if (contentType == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'contentType' when calling nsInstancesNsInstanceIdInstantiatePost");
+//        }
+//        // verify the required parameter 'version' is set
+//        if (version == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'version' when calling nsInstancesNsInstanceIdInstantiatePost");
+//        }
+//        // verify the required parameter 'nsInstanceId' is set
+//        if (nsInstanceId == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'nsInstanceId' when calling nsInstancesNsInstanceIdInstantiatePost");
+//        }
+//        // create path and map variables
+//        final Map<String, Object> uriVariables = new HashMap<String, Object>();
+//        uriVariables.put("nsInstanceId", nsInstanceId);
+//        String path = UriComponentsBuilder.fromPath("/ns_instances/{nsInstanceId}/instantiate").buildAndExpand(uriVariables).toUriString();
+//        
+//        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+//        final HttpHeaders headerParams = new HttpHeaders();
+//        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+//        if (accept != null)
+//            headerParams.add("Accept", apiClient.parameterToString(accept));
+//        if (authorization != null)
+//            headerParams.add("Authorization", apiClient.parameterToString(authorization));
+//        if (contentType != null)
+//            headerParams.add("Content-Type", apiClient.parameterToString(contentType));
+//        if (version != null)
+//            headerParams.add("Version", apiClient.parameterToString(version));
+//
+//        final String[] accepts = { 
+//            "application/json"
+//         };
+//        final List<MediaType> headeraccept = apiClient.selectHeaderAccept(accepts);
+//        final String[] contentTypes = { 
+//            "application/json"
+//         };
+//        final MediaType headercontentType = apiClient.selectHeaderContentType(contentTypes);
+//
+//        String[] authNames = new String[] {  };
+//
+//        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
+//        apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, headeraccept, headercontentType, authNames, returnType);
+    }
+    
+    public <T> ResponseEntity<T>   nsInstancesNsInstanceIdInstantiatePostResult(InstantiateNsRequest body, String accept, String contentType, String version, String nsInstanceId, String authorization, ParameterizedTypeReference<T> returnType) throws RestClientException {
         Object postBody = body;
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -439,9 +498,9 @@ public class NslcmDefaultApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<Void> returnType = new ParameterizedTypeReference<Void>() {};
-        apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, headeraccept, headercontentType, authNames, returnType);
+        return apiClient.invokeAPIResponseEntity(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, headeraccept, headercontentType, authNames, returnType);
     }
+    
     /**
      * Scale a NS instance.
      * The POST method requests to scale a NS instance resource. The steps and conditions that apply as the result of successfully executing this method are specified in clause 6.4.1.2. In addition, once the NFVO has successfully completed the underlying NS LCM operation occurrence, it shall reflect the result of scaling the NS instance by updating the \&quot;nsScaleStatus\&quot; attribute in the representation of the \&quot;Individual NS instance\&quot; resource. 
@@ -694,7 +753,61 @@ public class NslcmDefaultApi {
      * @return InlineResponse201
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public NsInstancesNsInstance nsInstancesPost(Body body, String version, String accept, String contentType, String authorization) throws RestClientException {
+    public NsInstancesNsInstance nsInstancesPost(CreateNsRequest body, String version, String accept, String contentType, String authorization) throws RestClientException {
+    	
+
+        ParameterizedTypeReference<NsInstancesNsInstance> returnType = new ParameterizedTypeReference<NsInstancesNsInstance>() {};
+        ResponseEntity<NsInstancesNsInstance> result = nsInstancesPostResult(body, version, accept, contentType, authorization, returnType);
+        return result.getBody();
+        
+//        Object postBody = body;
+//        // verify the required parameter 'body' is set
+//        if (body == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'body' when calling nsInstancesPost");
+//        }
+//        // verify the required parameter 'version' is set
+//        if (version == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'version' when calling nsInstancesPost");
+//        }
+//        // verify the required parameter 'accept' is set
+//        if (accept == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'accept' when calling nsInstancesPost");
+//        }
+//        // verify the required parameter 'contentType' is set
+//        if (contentType == null) {
+//            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'contentType' when calling nsInstancesPost");
+//        }
+//        String path = UriComponentsBuilder.fromPath("/ns_instances").build().toUriString();
+//        
+//        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+//        final HttpHeaders headerParams = new HttpHeaders();
+//        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+//        if (authorization != null)
+//            headerParams.add("Authorization", apiClient.parameterToString(authorization));
+//        if (version != null)
+//            headerParams.add("Version", apiClient.parameterToString(version));
+//        if (accept != null)
+//            headerParams.add("Accept", apiClient.parameterToString(accept));
+//        if (contentType != null)
+//            headerParams.add("Content-Type", apiClient.parameterToString(contentType));
+//
+//        final String[] accepts = { 
+//            "application/json"
+//         };
+//        final List<MediaType> headeraccept = apiClient.selectHeaderAccept(accepts);
+//        final String[] contentTypes = { 
+//            "application/json"
+//         };
+//        final MediaType headercontentType = apiClient.selectHeaderContentType(contentTypes);
+//
+//        String[] authNames = new String[] {  };
+//
+//        ParameterizedTypeReference<NsInstancesNsInstance> returnType = new ParameterizedTypeReference<NsInstancesNsInstance>() {};
+//        return apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, headeraccept, headercontentType, authNames, returnType);
+    }
+    
+    
+    public <T> ResponseEntity<T>   nsInstancesPostResult(CreateNsRequest body, String version, String accept, String contentType, String authorization, ParameterizedTypeReference<T> returnType) throws RestClientException {
         Object postBody = body;
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -737,9 +850,11 @@ public class NslcmDefaultApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<NsInstancesNsInstance> returnType = new ParameterizedTypeReference<NsInstancesNsInstance>() {};
-        return apiClient.invokeAPI(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, headeraccept, headercontentType, authNames, returnType);
+
+        return apiClient.invokeAPIResponseEntity(path, HttpMethod.POST, queryParams, postBody, headerParams, formParams, headeraccept, headercontentType, authNames, returnType);
     }
+    
+    
     /**
      * Query multiple NS LCM operation occurrences.
      * Get Operation Status. Shall be returned upon the following error: The operation cannot be executed currently, due to a conflict with the state of the resource. Typically, this is due to the fact that the NS instance resource is in NOT_INSTANTIATED state, or that another lifecycle management operation is ongoing. The response body shall contain a ProblemDetails structure, in which the \&quot;detail\&quot; attribute shall convey more information about the error 
