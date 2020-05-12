@@ -457,7 +457,7 @@ public class GenericSOL005Client implements OSMClient {
 		};
 
 		InstantiateNsRequest body = new InstantiateNsRequest();
-		;
+		
 		ResponseEntity<String> result = this.defaultNslcmDefaultApi.nsInstancesNsInstanceIdInstantiatePostResult(body,
 				"application/json", "application/json", "1.0", nsd_instance_id, null, returnType);
 
