@@ -14,6 +14,7 @@ package io.openslice.sol005nbi.model.nslcm;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,6 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-03-28T00:48:29.393+02:00[Europe/Athens]")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class CreateNsRequest {
   @JsonProperty("nsdId")
   private String nsdId = null;

@@ -131,7 +131,7 @@ public class GenericSOL005Client implements OSMClient {
 		aNslcmClient.setBasePath("https://10.10.10.37:9999/osm/" + aNslcmClient.getBasePath());
 		io.openslice.sol005nbi.auth.OAuth bAuth2nsl = (io.openslice.sol005nbi.auth.OAuth) aNslcmClient
 				.getAuthentication("bearerAuth");
-		bAuth2nsd.setAccessToken(this.getManoAuthorizationTokenID());
+		bAuth2nsl.setAccessToken(this.getManoAuthorizationTokenID());
 
 		this.defaultNslcmDefaultApi = new NslcmDefaultApi(aNslcmClient);
 	}
@@ -412,9 +412,9 @@ public class GenericSOL005Client implements OSMClient {
 
 		ParameterizedTypeReference<String> returnType = new ParameterizedTypeReference<String>() {
 		};
-		defaultApitNsdApi.nsDescriptorsNsdInfoIdNsdContentPutResult(nsd_id, "1.0", "application/zip", allBytes, null,
+		ResponseEntity<String> result = defaultApitNsdApi.nsDescriptorsNsdInfoIdNsdContentPutResult(nsd_id, "1.0", "application/zip", allBytes, null,
 				returnType);
-		return null;
+		return result;
 
 	}
 

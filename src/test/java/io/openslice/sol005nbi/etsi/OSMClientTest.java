@@ -40,7 +40,7 @@ public class OSMClientTest {
 		
 	    GenericSOL005Client osm7Clientent = new GenericSOL005Client("https://10.10.10.37:9999",
 	    		"admin",
-	    		"osmadmin#$",
+	    		"admin",
 	    		"admin", 
 	    		"https://10.10.10.37:9999/osm/admin/v1/tokens/",
 	    		"/vnfpkgm/v1");
@@ -111,5 +111,9 @@ public class OSMClientTest {
 			System.out.println("=== LIST getNsInstance POJO object response: " + ir.toString());				
 			
 		}
+	    
+	    
+	    
+	    
 	}
 }
