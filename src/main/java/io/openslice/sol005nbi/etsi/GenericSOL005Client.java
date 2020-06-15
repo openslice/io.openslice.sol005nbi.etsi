@@ -501,4 +501,16 @@ public class GenericSOL005Client implements OSMClient {
 		return mapper.readValue(content, valueType);
 	}
 
+	@Override
+	public ResponseEntity<String> actionNSInstance(String ns_instance_id, String payload) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getNSLCMDetailsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
