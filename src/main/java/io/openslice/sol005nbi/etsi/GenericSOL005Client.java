@@ -437,7 +437,8 @@ public class GenericSOL005Client implements OSMClient {
 		CreateNsRequest body = new CreateNsRequest();
 		try {
 			body = toJsonObj(json, CreateNsRequest.class);
-
+			body.setNsDescription("description");
+			//osm needs vimAccountId and wimAccountId" : false... NOT SOL005 supported
 			ResponseEntity<String> result = this.defaultNslcmDefaultApi.nsInstancesPostResult(body, "1.0",
 					"application/json", "application/json", null, returnType);
 			return result;
@@ -499,6 +500,18 @@ public class GenericSOL005Client implements OSMClient {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 		return mapper.readValue(content, valueType);
+	}
+
+	@Override
+	public ResponseEntity<String> actionNSInstance(String ns_instance_id, String payload) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getNSLCMDetailsList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
