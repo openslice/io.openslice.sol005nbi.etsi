@@ -514,4 +514,16 @@ public class GenericSOL005Client implements OSMClient {
 		return null;
 	}
 
+	@Override
+	public String getNSLCMDetailsListByNSID(String nsid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> scaleNSInstance(String ns_instance_id, String payload) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
