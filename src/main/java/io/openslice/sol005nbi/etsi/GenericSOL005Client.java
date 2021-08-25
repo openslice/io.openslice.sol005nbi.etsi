@@ -526,4 +526,28 @@ public class GenericSOL005Client implements OSMClient {
 		return null;
 	}
 
+	@Override
+	public ResponseEntity<String> getVIMs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getVNFDescriptorsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getNSDescriptorsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getNSInstancesList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
