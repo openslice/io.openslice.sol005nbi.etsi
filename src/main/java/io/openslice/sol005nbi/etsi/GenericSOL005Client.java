@@ -1,6 +1,6 @@
 /*-
  * ========================LICENSE_START=================================
- * io.openslice.sol005nbi.osm7
+ * io.openslice.sol005nbi.etsi
  * %%
  * Copyright (C) 2019 openslice.io
  * %%
