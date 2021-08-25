@@ -1,6 +1,6 @@
 /*-
  * ========================LICENSE_START=================================
- * io.openslice.sol005nbi.osm7
+ * io.openslice.sol005nbi.etsi
  * %%
  * Copyright (C) 2019 openslice.io
  * %%
@@ -522,6 +522,30 @@ public class GenericSOL005Client implements OSMClient {
 
 	@Override
 	public ResponseEntity<String> scaleNSInstance(String ns_instance_id, String payload) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getVIMs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getVNFDescriptorsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getNSDescriptorsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<String> getNSInstancesList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
