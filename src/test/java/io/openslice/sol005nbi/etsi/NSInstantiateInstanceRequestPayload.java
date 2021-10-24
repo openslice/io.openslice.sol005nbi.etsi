@@ -191,31 +191,7 @@ public class NSInstantiateInstanceRequestPayload
 		this.vld = vld;
 	}
 
-	
-//	public NSInstantiateInstanceRequestPayload(String nsName, String vimAccountId, String nsdId)
-//	{
-//		this.nsName = nsName;
-//		this.vimAccountId = vimAccountId;
-//		// Here we need to get the ExperimentOnBoardDescriptor based on the Experiment.
-//		// An Experiment might have multiple OnBoardDescriptors if it is OnBoarded to multiple OSM MANOs.
-//		// We temporarily select the first (and most probably the only one). 
-//		// Otherwise the user needs to define the OSM MANO where the Experiment is OnBoarded in order to instantiate.
-//		this.nsdId = nsdId;
-//		OSM7Client osm7client = new OSM7client
-//		NSD nsd_tmp = getNSDbyID(nsdId);
-//		Integer count=1;
-//		// READ the NSD from the OSM and get the vnfds and form the payload
-////		for(DeploymentDescriptorVxFPlacement tmp : deploymentdescriptor.getVxfPlacements())
-////		{
-////			VnF vnf_tmp = new VnF();
-////			vnf_tmp.memberVnFIndex=count.toString();
-////			vnf_tmp.vimAccount = tmp.getInfrastructure().getVIMid();
-////			this.vnf.add(vnf_tmp);
-////			count++;
-////		}
-//		// READ the NSD from the OSM and get the vlds and form the payload
-//	}
-	
+		
 	public String toJSON()
 	{
 		String jsonInString=null;
