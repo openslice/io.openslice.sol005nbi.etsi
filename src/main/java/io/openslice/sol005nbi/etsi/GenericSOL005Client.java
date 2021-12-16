@@ -550,4 +550,10 @@ public class GenericSOL005Client implements OSMClient {
 		return null;
 	}
 
+	@Override
+	public JSONObject getVNFInstanceInfo(String instanceId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
